@@ -1,3 +1,12 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.net.URL;
+import java.util.Scanner;
+
+
 /**
  * Created by ztokarski on 17.05.17.
  */
@@ -12,4 +21,96 @@ public class FilePartReader {
         this.toLine = -1;
     }
 
-}
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void setFromLine(Integer fromLine) {
+        this.fromLine = fromLine;
+    }
+
+    public void setToLine(Integer toLine) {
+        this.toLine = toLine;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public Integer getFromLine() {
+        return fromLine;
+    }
+
+    public Integer getToLine() {
+        return toLine;
+    }
+
+    public void setup(String filePath, Integer fromLine, Integer toLine) {
+        if (fromLine < 1) {
+            throw new IllegalArgumentException("fromLine cannot be lower than 1");
+        }
+        if (toLine < fromLine) {
+            throw new IllegalArgumentException("toLine cannot be lower than fromLine");
+        }
+    }
+
+    public String read(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            return sb.toString();
+        } finally {
+            br.close();
+        }
+    }
+
+    public String readlines (String filePath, Integer fromLine, Integer toLine) {
+        FilePartReader fpr = new FilePartReader();
+
+        try
+        {
+            String string = fpr.read(filePath);
+            LineNumberReader lnr = new LineNumberReader(new FileReader(string));
+            BufferedReader br = new BufferedReader(new FileReader(string));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            int counter = 0;
+            while (line != null) {
+                counter ++;
+                if (counter ==3) {
+                    sb.append(line);
+                }return sb.toString();
+            }
+            return sb.toString();
+        }
+        catch (IOException e) {
+            System.err.println("wielbłąd");
+        }
+        return "";
+    }
+
+//    public String readlines (String filePath, Integer fromLine, Integer toLine) {
+//        FilePartReader fpr = new FilePartReader();
+//        try {
+//
+//            return fpr.read(filePath);
+//        }
+//        catch (IOException e) {
+//            System.err.println("wielbłąd");
+//        }
+//        return "";
+//    }
+
+
+
+
+
+    }
+
