@@ -9,7 +9,7 @@ public class Main {
 //        System.out.println("Start");
         FilePartReader filePartReader = new FilePartReader();
         filePartReader.readlines("test_data.txt",2,3);
-        System.out.println(filePartReader.readlines("test_data.txt",1,100));
+        System.out.println(filePartReader.readlines("test_data.txt"));
 
 
 //        filePartReader.setup("asdff",6, 8);
