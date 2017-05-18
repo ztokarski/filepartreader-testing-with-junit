@@ -71,46 +71,41 @@ public class FilePartReader {
         }
     }
 
+
+//  read all lines from file
+    public String readlines (String filePath) {
+        FilePartReader fpr = new FilePartReader();
+        try {
+            return fpr.read(filePath);
+        }
+        catch (IOException e) {
+            System.err.println("IO exception");
+        }
+        return null;
+    }
+
+
     public String readlines (String filePath, Integer fromLine, Integer toLine) {
         FilePartReader fpr = new FilePartReader();
 
         try
         {
-            String string = fpr.read(filePath);
-            LineNumberReader lnr = new LineNumberReader(new FileReader(string));
-            BufferedReader br = new BufferedReader(new FileReader(string));
+            String str = fpr.read(filePath);
+            LineNumberReader rdr = new LineNumberReader(new FileReader(filePath));
             StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            int counter = 0;
-            while (line != null) {
-                counter ++;
-                if (counter ==3) {
+            for (String line = null; (line = rdr.readLine()) != null;) {
+                if (rdr.getLineNumber() >= fromLine &&
+                    rdr.getLineNumber() <= toLine) {
                     sb.append(line);
-                }return sb.toString();
+                    sb.append("\n");
+                }
             }
             return sb.toString();
-        }
+            }
         catch (IOException e) {
-            System.err.println("wielbłąd");
+            System.err.println("IO exception");
         }
-        return "";
+        return null;
     }
-
-//    public String readlines (String filePath, Integer fromLine, Integer toLine) {
-//        FilePartReader fpr = new FilePartReader();
-//        try {
-//
-//            return fpr.read(filePath);
-//        }
-//        catch (IOException e) {
-//            System.err.println("wielbłąd");
-//        }
-//        return "";
-//    }
-
-
-
-
-
     }
 
