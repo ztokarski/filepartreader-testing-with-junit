@@ -21,6 +21,12 @@ public class FilePartReader {
         this.toLine = -1;
     }
 
+    public FilePartReader(String filePath, Integer fromLine, Integer toLine) {
+        this.filePath = filePath;
+        this.fromLine = fromLine;
+        this.toLine = toLine;
+    }
+
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
@@ -62,7 +68,7 @@ public class FilePartReader {
 
             while (line != null) {
                 sb.append(line);
-                sb.append("\n");
+                sb.append(" ");
                 line = br.readLine();
             }
             return sb.toString();
@@ -97,7 +103,7 @@ public class FilePartReader {
                 if (rdr.getLineNumber() >= fromLine &&
                     rdr.getLineNumber() <= toLine) {
                     sb.append(line);
-                    sb.append("\n");
+                    sb.append(" ");
                 }
             }
             return sb.toString();
@@ -107,5 +113,10 @@ public class FilePartReader {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return this.filePath;
     }
+}
 
