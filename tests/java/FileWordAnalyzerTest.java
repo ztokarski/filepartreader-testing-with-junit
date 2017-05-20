@@ -41,10 +41,35 @@ public class FileWordAnalyzerTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+//  #4 test wordsContainingSubString method for lines 5-6 and string "a".
+    public void testSubString5_6() {
+        FilePartReader filePartReader = new FilePartReader("test_data.txt",5,6);
+        FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer();
+        List<String> expected = new ArrayList<>(Arrays.asList("5ax", "6ea", "6ca", "6a" ));
+        List<String> actual = fileWordAnalyzer.wordsContainingSubString("a",filePartReader);
+        assertEquals(expected, actual);
+    }
 
+    @Test
+//  #5 test wordsContainingSubString method for lines 3 and string "3".
+    public void testSubString3() {
+        FilePartReader filePartReader = new FilePartReader("test_data.txt",3,3);
+        FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer();
+        List<String> expected = new ArrayList<>(Arrays.asList("3c", "3b", "3a" ));
+        List<String> actual = fileWordAnalyzer.wordsContainingSubString("3",filePartReader);
+        assertEquals(expected, actual);
+    }
 
-
-
+    @Test
+//  #6 test wordsContainingSubString method for lines 5-6 and string "bb".
+    public void testSubStringAll() {
+        FilePartReader filePartReader = new FilePartReader("test_data.txt",1,7);
+        FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer();
+        List<String> expected = new ArrayList<>(Arrays.asList("4bb4", "6bb" ));
+        List<String> actual = fileWordAnalyzer.wordsContainingSubString("bb",filePartReader);
+        assertEquals(expected, actual);
+    }
 
     @Test
 //  #7 test wordsArePalindrome method for line 1.
