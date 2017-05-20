@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -52,6 +54,15 @@ public class FilePartReaderTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+//  #7 tests reading all lines from file.
+    public void testReadLinesPastEof() {
+        FilePartReader filePartReader = new FilePartReader();
+        String expected = "1a1 2b 2a 3c 3b 3a 4d 4cr 4bb4 4a 5e 5d 5c 5b 5ax "
+            + "6f 6ea 6d 6ca 6bb 6a 7g 7f 7ea ";
+        String actual = filePartReader.readlines("test_data.txt", 1, 99);
+        assertEquals(expected, actual);
+    }
 }
 
 

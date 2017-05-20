@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -85,7 +86,7 @@ public class FilePartReader {
             return fpr.read(filePath);
         }
         catch (IOException e) {
-            System.err.println("IO exception");
+            System.err.println("File Not Found");
         }
         return null;
     }
@@ -93,6 +94,7 @@ public class FilePartReader {
 
     public String readlines (String filePath, Integer fromLine, Integer toLine) {
         FilePartReader fpr = new FilePartReader();
+        fpr.setup(filePath, fromLine, toLine);
 
         try
         {
@@ -108,9 +110,13 @@ public class FilePartReader {
             }
             return sb.toString();
             }
-        catch (IOException e) {
-            System.err.println("IO exception");
+        catch (FileNotFoundException e) {
+            System.err.println("File Not Found");
         }
+        catch (IOException e) {
+            System.err.println("IOException");
+        }
+
         return null;
     }
 
